@@ -11,7 +11,7 @@ import json
 
 
 def main(file):
-    if not file:
+    if file.empty:
         raise ValueError("Empty, cannot proceed")
 
     json_config_path="resources/filters.json"

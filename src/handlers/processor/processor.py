@@ -3,6 +3,8 @@ import sys
 from common.logging import get_logger
 from common.filter_params import FilterParams
 import random
+import datetime
+import pandas as pd
 
 
 class FileProcessor(FilterParams):
@@ -39,7 +41,7 @@ class FileProcessor(FilterParams):
             file = self._apply_y_name(file)
             self._logger.info(f"applied y name")
         
-         if self.catogorize_address:
+        if self.catogorize_address:
             file, aggregated = self._apply_address(file)
             self._logger.info(f"applied address catagorization")
 
@@ -63,8 +65,8 @@ class FileProcessor(FilterParams):
         file.loc[file['pdays']!=num]
         return file
 
-     def _apply_bool(self, file):
-         for col in file.columns:
+    def _apply_bool(self, file):
+        for col in file.columns:
             if len(list(file[f'{col}'].unique())) == 2:
                 if ['no','yes'] == list(file[f'{col}'].unique()):
                     print(col)
@@ -96,7 +98,7 @@ class FileProcessor(FilterParams):
                         else:
                             file.loc[i,'catagory'] = "multi_catagory_address"
 
-        aggregated = _aggregate_by_category(file)
+        aggregated = self._aggregate_by_category(file)
         return file, aggregated
 
     def _apply_time(self, file):
@@ -111,9 +113,9 @@ class FileProcessor(FilterParams):
         
     def _apply_y_name(self, file): 
             file.rename({'y':str(self.new_y)}, axis=1, inplace=True)
-        return file
+            return file
 
-    def _aggregate_by_category(self):
+    def _aggregate_by_category(self,file):
         grouped=file.groupby(['catagory','age'])['catagory'].count()
         aggregated= pd.DataFrame(grouped)
 
@@ -121,8 +123,12 @@ class FileProcessor(FilterParams):
 
     def _persist_files_locally(self,file,aggregated):
 
-        file.to_csv(f'tests/data/test_a_{random.randrange(0,100,1)}.csv')
-        file.to_parquet(f'tests/data/test_a_{random.randrange(0,100,1)}.gzip', compression='gzip')
+        file.to_csv(f'tests/data/test_unaggregated_{random.randrange(0,10,1)}.csv')
+        file.to_parquet(f'tests/data/test_unaggregated_{random.randrange(0,10,1)}.gzip', compression='gzip')
+
+        aggregated.to_csv(f'tests/data/test_aggregated_{random.randrange(0,10,1)}.csv')
+        aggregated.to_parquet(f'tests/data/test_aggregated_{random.randrange(0,10,1)}.gzip', compression='gzip')
+
 
 
 

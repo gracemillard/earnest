@@ -1,16 +1,28 @@
 {
-    "filter_type":[
-       "remove_pdays",
-       "name_split",
-       "age",
-       "boolean_replacement",
-       "time_reformating",
-       "rename_y",
-       "catogorize_address"
-    ],
-    "pdays_constraint":"-1",
-    "age_increment":"10",
-    "date_format":"dd/MM",
-    "new_name":"outcome",
-    "address_catagories":{"water":["lake","creek"],"relief":["hill","canyon"],"flat":["plain"]}
- }
+   "filter_type": [
+      "pdays",
+      "name_split",
+      "age",
+      "boolean_replacement",
+      "time_reformating",
+      "rename_y",
+      "catogorize_address"
+   ],
+   "pdays_constraint": "-1",
+   "age_increment": "10",
+   "date_format": "dd/MM",
+   "new_name": "outcome",
+   "address_catagories": {
+      "water": [
+         "lake",
+         "creek"
+      ],
+      "relief": [
+         "hill",
+         "canyon"
+      ],
+      "flat": [
+         "plain"
+      ]
+   }
+}
