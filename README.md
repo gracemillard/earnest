@@ -12,7 +12,27 @@ conda activate takehome
 cd src
 pip install -r requirements-dev.txt -i https://pypi.org/simple
 pip install -r handlers/requirements.txt -i https://pypi.org/simple
+
 ```
+
+## How to run test
+
+```shell
+cd src/handlers
+python3 -m tests.test
+```
+
+## TO DOs
+
+Add check to make sure date format input is valid .... add checks to make sure any given input is valid
+
+Optimize individual apply_ functions 
+
+Write function to get file size and chunk it before passing it in thru the handler
+
+Write function to check for type consistency in the dataframe (make sure stuff like age is all int and purge any charecters if encountered)
+
+add more/better logging and exception handling
 
 ## The Ask
 -  Complete as many of the following steps as you can. If you can’t complete a step that’s fine,
@@ -47,12 +67,6 @@ parquet formats.
 ## The Deployment Plan
 ...tbd...
 
-## How to run test
-
-```shell
-cd src/handlers
-python3 -m tests.test
-```
 
 ## Consideraions
 
@@ -60,14 +74,6 @@ python3 -m tests.test
 -- What needs to be modifiable? <br/>
 
 
-## TO DOs
 
-Add check to make sure date format input is valid .... add checks to make sure any given input is valid
-
-Optimize individual apply_ functions 
-
-Write function to get file size and chunk it before passing it in thru the handler
-
-Write function to check for type consistency in the dataframe (make sure stuff like age is all int and purge any charecters if encountered)
 
 
