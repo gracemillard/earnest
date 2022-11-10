@@ -2,3 +2,5 @@
 black
 pytest
 isort
+pyarrow
+fastparquet
