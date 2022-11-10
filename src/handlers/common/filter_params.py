@@ -1,23 +1,6 @@
 import json
 
 
-{
-    "filter_type":[
-       "remove_pdays",
-       "name_split",
-       "age",
-       "boolean_replacement",
-       "time_reformating",
-       "rename_y",
-       "catogorize_address"
-    ],
-    "pdays_constraint":"-1",
-    "age_increment":"10",
-    "date_format":"dd/MM",
-    "new_name":"outcome",
-    "address_catagories":{"water":["lake","creek"],"relief":["hill","canyon"],"flat":["plain"]}
- }
-
 
 class FilterParams():
 
@@ -33,7 +16,6 @@ class FilterParams():
         self.new_y=None
         self.pdays_constraint = None
         self.age_increment = None
-        self.date_format = None
         self.new_name = None
         self.address_catagories = None
 
@@ -67,6 +49,7 @@ class FilterParams():
                 self.age_increment=configurations['age_increment']
             else:
                 self.age_increment=10
+                
     def _is_name_y(self, configurations):
         if "rename_y" in configurations['filter_type']:
             print("rename_y was selected in config")
@@ -89,14 +72,13 @@ class FilterParams():
 
     def _is_time_reformating(self, configurations):
         if "time_reformating" in configurations['filter_type']:
+            self.time_reformating=True
             print("time_reformating was selected in config")
-            if configurations['date_format']:
-                self.date_format=configurations['date_format']
-            else:
-                self.date_format="dd/MM"
+            
 
     def _is_address(self, configurations):
         if "catogorize_address" in configurations['filter_type']:
+            self.catogorize_address = True
             print("catogorize_address was selected in config")
             if configurations['address_catagories']:
                 self.address_catagories=configurations['address_catagories']
@@ -108,12 +90,22 @@ class FilterParams():
         configurations = self._read_json_config(json_config_path)
 
         self._is_pdays(configurations)
+
+        self._is_age(configurations)
+
+        self._is_bool_replacement(configurations)
+
+        self._is_address(configurations)
+
+        self._is_time_reformating(configurations)
+
+        self._is_name_y(configurations)
         
         self._is_name(configurations)
 
-        self._is_size(configurations)
-
-    #    print(f"everthing set , here is a look {self.color_pattern}")
+        self._is_address(configurations)
 
 
 
+
+    
