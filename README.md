@@ -17,6 +17,8 @@ pip install -r handlers/requirements.txt -i https://pypi.org/simple
 
 ## How to run test
 
+you can change the configuration file if you would like
+
 ```shell
 cd src/handlers
 python3 -m tests.test
@@ -69,6 +71,9 @@ parquet formats.
 
 
 ## Consideraions
+
+I created modifiable config file in case one would want to change any of the inputs.
+
 
 -- How often will this be used  <br />
 -- What needs to be modifiable? <br/>
